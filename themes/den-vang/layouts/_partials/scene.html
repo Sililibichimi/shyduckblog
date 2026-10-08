@@ -1,0 +1,96 @@
+{{- /* Cảnh đèn đường: đèn chập chờn, đom đóm, người que (điều khiển bởi js/scene.js) */ -}}
+{{ $lf := site.Params.lastfm }}
+<div class="scene"
+  {{- if and $lf.user $lf.apiKey }} data-lastfm-user="{{ $lf.user }}" data-lastfm-key="{{ $lf.apiKey }}" data-lastfm-poll="{{ default 60 $lf.pollSeconds }}"{{ end }}>
+<svg viewBox="0 0 360 300" role="img" aria-label="Hình vẽ tay: cột đèn đường chiếu xuống chiếc ghế đá trong đêm">
+  <!-- ánh đèn -->
+  <g class="night-only lamp-a"><g class="lamp-b">
+    <polygon class="f-accent" points="190,98 202,98 262,260 128,260" opacity="0.13"></polygon>
+    <circle class="f-accent" cx="196" cy="100" r="18" opacity="0.22"></circle>
+  </g></g>
+
+  <!-- cột đèn, ghế, mặt đất, lá -->
+  <g class="s-ink" filter="url(#rough)" opacity="0.85">
+    <path d="M10 262 C 80 258, 150 266, 220 260 S 330 264, 350 260"></path>
+    <path d="M251 262 L 253 72"></path>
+    <path d="M240 262 L 264 262 L 259 248 L 245 248 Z"></path>
+    <path d="M253 76 C 232 60, 206 62, 196 84"></path>
+    <path d="M152 222 L 222 219"></path>
+    <path d="M160 222 L 160 236 M214 220 L 214 234"></path>
+    <path d="M112 160 c 6 -7 15 -4 14 4 c -6 7 -15 4 -14 -4 z"></path>
+    <path d="M300 205 c 7 -4 14 0 11 7 c -7 4 -14 0 -11 -7 z"></path>
+  </g>
+  <g class="s-ink night-only" filter="url(#rough)" opacity="0.85">
+    <path d="M128 30 h6 M131 27 v6 M300 42 h6 M303 39 v6 M38 124 h6 M41 121 v6 M318 150 h6 M321 147 v6"></path>
+  </g>
+
+  <!-- bóng đèn -->
+  <path class="s-accent" d="M184 84 L 208 84 L 202 98 L 190 98 Z" filter="url(#rough)"></path>
+  <g class="night-only lamp-a"><g class="lamp-b">
+    <path class="f-accent" d="M184 84 L 208 84 L 202 98 L 190 98 Z" filter="url(#rough)"></path>
+  </g></g>
+
+  <!-- trăng (đêm) / mặt trời (ngày) -->
+  <path class="s-accent night-only" d="M70 40 A 26 26 0 1 0 100 82 A 20 20 0 1 1 70 40 Z" filter="url(#rough)"></path>
+  <g class="s-accent day-only" filter="url(#rough)">
+    <circle cx="76" cy="62" r="16"></circle>
+    <path d="M76 34 v8 M76 82 v8 M48 62 h8 M96 62 h8 M56 42 l6 6 M90 76 l6 6 M56 82 l6 -6 M90 48 l6 -6"></path>
+  </g>
+
+  <!-- người que -->
+  <g id="walker" class="walker is-off" transform="translate(-30 260)" filter="url(#rough)" aria-hidden="true">
+    <g class="pose-walk s-ink">
+      <circle cx="0" cy="-45" r="5"></circle>
+      <path d="M0 -40 L 0 -20"></path>
+      <path class="leg-a" d="M0 -20 L 0 0"></path>
+      <path class="leg-b" d="M0 -20 L 0 0"></path>
+      <path class="arm-a" d="M0 -34 L 0 -22"></path>
+      <path class="arm-b" d="M0 -34 L 0 -22"></path>
+    </g>
+    <g class="pose-sit">
+      <g class="s-ink">
+        <path d="M0 -26 L -2 -46"></path>
+        <path d="M0 -26 L 13 -26 L 14 0 M0 -26 L 11 -24 L 9 0"></path>
+        <path d="M-1 -40 L 8 -31 L 13 -28"></path>
+      </g>
+      <g class="bob">
+        <circle class="s-ink" cx="-3" cy="-52" r="5"></circle>
+        <path class="s-accent" d="M-9 -53 C -9 -62, 3 -62, 3 -53"></path>
+        <rect class="f-accent" x="-10.5" y="-56" width="3.2" height="6" rx="1.2"></rect>
+        <rect class="f-accent" x="1.3" y="-56" width="3.2" height="6" rx="1.2"></rect>
+      </g>
+      <g class="note">
+        <path class="s-accent" d="M10 -60 L 10 -68 L 14 -69"></path><circle class="f-accent" cx="8.6" cy="-60" r="1.7"></circle>
+      </g>
+      <g class="note note-2">
+        <path class="s-accent" d="M5 -64 L 5 -71"></path><circle class="f-accent" cx="3.6" cy="-64" r="1.6"></circle>
+      </g>
+    </g>
+  </g>
+
+  <!-- mặt ghế vẽ sau người que để người ngồi "lên" ghế -->
+  <g class="s-ink" filter="url(#rough)" opacity="0.85">
+    <path d="M150 236 L 224 233"></path>
+    <path d="M158 236 L 155 258 M216 233 L 218 258"></path>
+  </g>
+
+  <!-- đom đóm quanh đèn -->
+  <g class="night-only lamp-ff" aria-hidden="true">
+    <g>
+      <circle class="f-firefly" r="6" opacity="0.35" filter="url(#ffglow)"></circle><circle class="f-firefly" r="2"></circle>
+      <animateMotion dur="9s" repeatCount="indefinite" path="M156 100 C 150 60, 230 50, 238 92 C 244 130, 180 150, 162 126 C 154 116, 158 106, 156 100 Z"></animateMotion>
+      <animate attributeName="opacity" values="0;1;0.3;1;0.6;0" dur="2.6s" repeatCount="indefinite"></animate>
+    </g>
+    <g>
+      <circle class="f-firefly" r="6" opacity="0.35" filter="url(#ffglow)"></circle><circle class="f-firefly" r="1.8"></circle>
+      <animateMotion dur="12s" repeatCount="indefinite" path="M210 70 C 250 80, 240 140, 200 132 C 160 124, 150 80, 180 66 C 192 60, 202 64, 210 70 Z"></animateMotion>
+      <animate attributeName="opacity" values="0.2;1;0;0.9;0.2" dur="3.4s" repeatCount="indefinite"></animate>
+    </g>
+    <g>
+      <circle class="f-firefly" r="6" opacity="0.35" filter="url(#ffglow)"></circle><circle class="f-firefly" r="2"></circle>
+      <animateMotion dur="15s" repeatCount="indefinite" path="M120 170 C 140 120, 220 110, 260 150 C 290 180, 230 200, 190 180 C 160 166, 110 200, 120 170 Z"></animateMotion>
+      <animate attributeName="opacity" values="1;0.2;0;0;0.8;1" dur="4.1s" repeatCount="indefinite"></animate>
+    </g>
+  </g>
+</svg>
+</div>

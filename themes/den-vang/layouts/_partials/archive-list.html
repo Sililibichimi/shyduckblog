@@ -1,0 +1,28 @@
+{{- /* Danh sách bài nhóm theo năm. Nhận vào: một Paginator */ -}}
+{{ $pager := . }}
+{{ range $pager.Pages.GroupByDate "2006" }}
+  <section class="year-group" aria-labelledby="y-{{ .Key }}">
+    <h2 class="hand year" id="y-{{ .Key }}">{{ .Key }}</h2>
+    <ul class="archive">
+      {{ range .Pages }}
+        <li>
+          <time class="hand date" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "02 · 01" }}</time>
+          <span class="archive-text">
+            <a class="archive-title" href="{{ .RelPermalink }}">{{ .Title }}</a>
+            {{ with .Description }}<span class="post-desc">{{ . }}</span>{{ end }}
+          </span>
+        </li>
+      {{ end }}
+    </ul>
+  </section>
+{{ else }}
+  <p class="empty">chưa có bài nào ở đây.</p>
+{{ end }}
+
+{{ if gt $pager.TotalPages 1 }}
+<nav class="pager hand" aria-label="Phân trang">
+  {{ with $pager.Prev }}<a href="{{ .URL }}">← mới hơn</a>{{ else }}<span></span>{{ end }}
+  <span>trang {{ $pager.PageNumber }} / {{ $pager.TotalPages }}</span>
+  {{ with $pager.Next }}<a href="{{ .URL }}">cũ hơn →</a>{{ else }}<span></span>{{ end }}
+</nav>
+{{ end }}

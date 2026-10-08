@@ -1,0 +1,8 @@
+<footer class="site-footer hand">
+  <span>{{ site.Params.footer }}</span>
+  <span class="footer-links">
+    {{ with site.Home.OutputFormats.Get "rss" }}<a href="{{ .RelPermalink }}">rss</a>{{ end }}
+    <a href="{{ "tags/" | relURL }}">thẻ</a>
+    <span>© {{ now.Year }} {{ or site.Params.author site.Title }}</span>
+  </span>
+</footer>

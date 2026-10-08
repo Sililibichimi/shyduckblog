@@ -1,0 +1,22 @@
+<header class="site-header">
+  <a class="brand" href="{{ "/" | relURL }}">
+    <svg width="40" height="40" viewBox="0 0 40 40" aria-hidden="true"><path class="s-accent" d="M14 6 A 15 15 0 1 0 34 26 A 12 12 0 1 1 14 6 Z" filter="url(#rough)"></path></svg>
+    <span class="hand">{{ site.Title }}</span>
+  </a>
+  <div class="header-right">
+    <nav aria-label="Điều hướng chính">
+      <ul class="nav">
+        {{ $page := . }}
+        {{ range site.Menus.main }}
+          {{ $active := or ($page.IsMenuCurrent "main" .) ($page.HasMenuCurrent "main" .) }}
+          {{ if and (eq .PageRef "/writing") (in site.Params.mainSections $page.Section) }}{{ $active = true }}{{ end }}
+          <li><a href="{{ .URL }}"{{ if $active }} class="is-active" aria-current="page"{{ end }}>{{ .Name }}</a></li>
+        {{ end }}
+      </ul>
+    </nav>
+    <button class="mode-toggle" type="button" aria-label="Đổi chế độ ngày / đêm" title="Đổi chế độ ngày / đêm">
+      <svg class="icon-moon" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 3 A 9 9 0 1 0 21 15 A 7 7 0 1 1 9 3 Z"></path></svg>
+      <svg class="icon-sun" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.5"></circle><path d="M12 2.5v2.5M12 19v2.5M2.5 12H5M19 12h2.5M5.2 5.2l1.7 1.7M17.1 17.1l1.7 1.7M5.2 18.8l1.7-1.7M17.1 6.9l1.7-1.7"></path></svg>
+    </button>
+  </div>
+</header>

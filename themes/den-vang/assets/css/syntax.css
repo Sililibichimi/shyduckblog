@@ -1,0 +1,50 @@
+/* =========================================================
+   Màu tô code (Hugo / Chroma) theo tông vàng trầm
+   ========================================================= */
+
+:root,
+:root[data-mode="night"] {
+  --c-keyword: #d4b04a;
+  --c-string: #b8c08a;
+  --c-comment: #8a8270;
+  --c-number: #dc9a6c;
+  --c-func: #e9dfc6;
+  --c-type: #c7a77a;
+  --c-builtin: #d9a85a;
+  --c-op: #b5ab92;
+}
+:root[data-mode="day"] {
+  --c-keyword: #7a5a0c;
+  --c-string: #4d5e1c;
+  --c-comment: #6f6754;
+  --c-number: #9a4a1c;
+  --c-func: #2b2619;
+  --c-type: #6b4a22;
+  --c-builtin: #81520f;
+  --c-op: #4f4738;
+}
+
+.chroma { color: var(--ink); background: transparent; }
+.chroma .err { color: var(--c-number); }
+.chroma .hl { display: block; background: var(--line-soft); }
+.chroma .lnt, .chroma .ln { color: var(--c-comment); margin-right: .8em; user-select: none; }
+
+/* từ khoá */
+.chroma .k, .chroma .kc, .chroma .kd, .chroma .kn, .chroma .kp, .chroma .kr, .chroma .kt, .chroma .ow { color: var(--c-keyword); }
+/* chuỗi */
+.chroma .s, .chroma .sa, .chroma .sb, .chroma .sc, .chroma .dl, .chroma .sd, .chroma .s2, .chroma .se,
+.chroma .sh, .chroma .si, .chroma .sx, .chroma .sr, .chroma .s1, .chroma .ss { color: var(--c-string); }
+/* chú thích */
+.chroma .c, .chroma .ch, .chroma .cm, .chroma .c1, .chroma .cs, .chroma .cp, .chroma .cpf { color: var(--c-comment); font-style: italic; }
+/* số */
+.chroma .m, .chroma .mb, .chroma .mf, .chroma .mh, .chroma .mi, .chroma .il, .chroma .mo { color: var(--c-number); }
+/* hàm, lớp, kiểu */
+.chroma .nf, .chroma .fm { color: var(--c-func); font-weight: 600; }
+.chroma .nc, .chroma .nn, .chroma .nt { color: var(--c-type); }
+.chroma .nb, .chroma .bp, .chroma .nd, .chroma .na { color: var(--c-builtin); }
+/* toán tử, dấu câu */
+.chroma .o, .chroma .p { color: var(--c-op); }
+/* diff */
+.chroma .gd { color: var(--c-number); }
+.chroma .gi { color: var(--c-string); }
+.chroma .gh, .chroma .gu { color: var(--c-keyword); }

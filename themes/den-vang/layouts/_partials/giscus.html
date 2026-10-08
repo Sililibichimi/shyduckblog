@@ -1,0 +1,30 @@
+{{ $g := site.Params.giscus }}
+{{ if and $g.repo $g.repoId $g.categoryId (ne .Params.comments false) }}
+<section class="comments" aria-label="Bình luận">
+  <h2 class="hand">để lại vài dòng</h2>
+  <div class="giscus"></div>
+  <script>
+    (function () {
+      var mode = document.documentElement.getAttribute("data-mode") === "day" ? "light" : "dark_dimmed";
+      var s = document.createElement("script");
+      s.src = "https://giscus.app/client.js";
+      s.async = true;
+      s.crossOrigin = "anonymous";
+      var cfg = {
+        "data-repo": {{ $g.repo }},
+        "data-repo-id": {{ $g.repoId }},
+        "data-category": {{ $g.category }},
+        "data-category-id": {{ $g.categoryId }},
+        "data-mapping": "pathname",
+        "data-reactions-enabled": "1",
+        "data-input-position": "top",
+        "data-lang": "vi",
+        "data-loading": "lazy",
+        "data-theme": mode
+      };
+      for (var k in cfg) s.setAttribute(k, cfg[k]);
+      document.currentScript.parentNode.appendChild(s);
+    })();
+  </script>
+</section>
+{{ end }}

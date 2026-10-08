@@ -1,0 +1,10 @@
+{{ define "main" }}
+<div class="list-page">
+  <header class="list-head">
+    <h1 class="list-title">{{ .Title }}</h1>
+    {{ with .Description }}<p class="article-desc">{{ . }}</p>{{ end }}
+    {{ with .Content }}<div class="prose list-intro">{{ . }}</div>{{ end }}
+  </header>
+  {{ partial "archive-list.html" .Paginator }}
+</div>
+{{ end }}

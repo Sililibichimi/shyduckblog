@@ -1,0 +1,33 @@
+{{ define "main" }}
+<article class="article">
+  <header class="article-head">
+    {{ with .Parent }}<a class="back-link hand" href="{{ .RelPermalink }}">← {{ .Title | lower }}</a>{{ end }}
+    <p class="hand article-meta">
+      <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "02 · 01 · 2006" }}</time>
+      — {{ .ReadingTime }} phút đọc
+      {{ with .GetTerms "tags" }}— {{ range $i, $t := . }}{{ if $i }}, {{ end }}<a href="{{ $t.RelPermalink }}">{{ $t.LinkTitle }}</a>{{ end }}{{ end }}
+    </p>
+    <h1 class="article-title">{{ .Title }}</h1>
+    {{ with .Description }}<p class="article-desc">{{ . }}</p>{{ end }}
+  </header>
+
+  <div class="prose{{ if ne .Params.dropcap false }} has-dropcap{{ end }}">
+    {{ .Content }}
+  </div>
+
+  <div class="ornament" aria-hidden="true"></div>
+
+  {{ if or .PrevInSection .NextInSection }}
+  <nav class="post-nav" aria-label="Bài khác">
+    {{ with .PrevInSection }}
+      <a class="card post-nav-item" href="{{ .RelPermalink }}"><span class="hand">← bài cũ hơn</span><span class="post-nav-title">{{ .Title }}</span></a>
+    {{ else }}<span></span>{{ end }}
+    {{ with .NextInSection }}
+      <a class="card card-alt post-nav-item is-next" href="{{ .RelPermalink }}"><span class="hand">bài mới hơn →</span><span class="post-nav-title">{{ .Title }}</span></a>
+    {{ end }}
+  </nav>
+  {{ end }}
+
+  {{ partial "giscus.html" . }}
+</article>
+{{ end }}

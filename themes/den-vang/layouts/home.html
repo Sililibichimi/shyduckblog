@@ -1,0 +1,55 @@
+{{ define "main" }}
+<div class="wrap">
+  <section class="hero">
+    <div class="hero-text">
+      {{ with site.Params.tagline }}<p class="hand hero-tagline">{{ . }}</p>{{ end }}
+      <h1 class="hero-title">{{ site.Params.heroTitle }}{{ with site.Params.heroTitleAccent }} <em>{{ . }}</em>{{ end }}</h1>
+      {{ with site.Params.intro }}<p class="hero-intro">{{ . | markdownify }}</p>{{ end }}
+      {{ partial "social.html" . }}
+    </div>
+    <div class="hero-scene">
+      {{ partial "scene.html" . }}
+    </div>
+  </section>
+
+  <div class="columns">
+    <section class="recent" aria-labelledby="recent-heading">
+      {{ $all := where site.RegularPages "Section" "in" site.Params.mainSections }}
+      {{ $n := default 6 site.Params.homeRecentCount }}
+      <div class="recent-head">
+        <h2 id="recent-heading" class="hand">gần đây</h2>
+        <div class="tabs hand" role="tablist" aria-label="Lọc bài viết">
+          {{ range $i, $t := site.Params.homeTabs }}
+            <button type="button" role="tab" id="tab-{{ $i }}" aria-controls="panel-{{ $i }}" aria-selected="{{ if eq $i 0 }}true{{ else }}false{{ end }}">{{ $t.name }}</button>
+          {{ end }}
+          <button type="button" role="tab" id="tab-all" aria-controls="panel-all" aria-selected="{{ if not site.Params.homeTabs }}true{{ else }}false{{ end }}">tất cả</button>
+        </div>
+      </div>
+
+      {{ range $i, $t := site.Params.homeTabs }}
+        <div class="tab-panel" role="tabpanel" id="panel-{{ $i }}" aria-labelledby="tab-{{ $i }}">
+          {{ $pages := first $n (where $all "Section" $t.section) }}
+          {{ range $pages }}{{ partial "post-item.html" . }}{{ else }}<p class="empty">chưa có bài nào ở đây.</p>{{ end }}
+        </div>
+      {{ end }}
+      <div class="tab-panel" role="tabpanel" id="panel-all" aria-labelledby="tab-all">
+        {{ range first $n $all }}{{ partial "post-item.html" . }}{{ else }}<p class="empty">chưa có bài nào ở đây.</p>{{ end }}
+      </div>
+
+      {{ with site.GetPage "/writing" }}<a class="more-link hand" href="{{ .RelPermalink }}">xem tất cả bài viết →</a>{{ end }}
+    </section>
+
+    <aside class="side" aria-label="Thông tin thêm">
+      {{ partial "now-cards.html" . }}
+      {{ with site.Taxonomies.tags }}
+        <div class="side-block">
+          <h2 class="hand side-heading">thẻ</h2>
+          <ul class="tag-list hand">
+            {{ range first 12 .ByCount }}<li><a class="tag" href="{{ .Page.RelPermalink }}">{{ .Page.Title }}</a></li>{{ end }}
+          </ul>
+        </div>
+      {{ end }}
+    </aside>
+  </div>
+</div>
+{{ end }}

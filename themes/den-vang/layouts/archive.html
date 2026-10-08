@@ -1,0 +1,17 @@
+{{- /* Trang tổng hợp mọi bài viết trong mainSections (layout: archive) */ -}}
+{{ define "main" }}
+<div class="list-page">
+  <header class="list-head">
+    <h1 class="list-title">{{ .Title }}</h1>
+    {{ with .Description }}<p class="article-desc">{{ . }}</p>{{ end }}
+    {{ with .Content }}<div class="prose list-intro">{{ . }}</div>{{ end }}
+    {{ with site.Params.homeTabs }}
+    <p class="hand section-links">
+      {{ range $i, $t := . }}{{ with site.GetPage (printf "/%s" $t.section) }}{{ if $i }} · {{ end }}<a href="{{ .RelPermalink }}">{{ $t.name }}</a>{{ end }}{{ end }}
+    </p>
+    {{ end }}
+  </header>
+  {{ $pages := where site.RegularPages "Section" "in" site.Params.mainSections }}
+  {{ partial "archive-list.html" (.Paginate $pages) }}
+</div>
+{{ end }}

@@ -1,0 +1,21 @@
+{{ define "main" }}
+<div class="not-found">
+  <svg class="nf-scene" viewBox="0 0 360 260" role="img" aria-label="Hình vẽ tay: cột đèn đã tắt và chiếc ghế đá trống">
+    <g class="s-ink" filter="url(#rough)" opacity="0.7">
+      <path d="M10 232 C 80 228, 150 236, 220 230 S 330 234, 350 230"></path>
+      <path d="M251 232 L 253 42"></path>
+      <path d="M240 232 L 264 232 L 259 218 L 245 218 Z"></path>
+      <path d="M253 46 C 232 30, 206 32, 196 54"></path>
+      <path d="M184 54 L 208 54 L 202 68 L 190 68 Z"></path>
+      <path d="M150 206 L 224 203"></path>
+      <path d="M152 192 L 222 189"></path>
+      <path d="M158 206 L 155 228 M216 203 L 218 228 M160 192 L 160 206 M214 190 L 214 204"></path>
+      <path d="M180 214 c 6 -5 13 -2 12 4 c -6 5 -13 2 -12 -4 z"></path>
+    </g>
+  </svg>
+  <p class="hand nf-code">404</p>
+  <h1 class="article-title">Đèn ở đây đã tắt rồi.</h1>
+  <p class="article-desc">Trang bạn tìm không có, hoặc đã đi đâu mất.</p>
+  <a class="more-link hand" href="{{ "/" | relURL }}">← quay về chỗ có đèn</a>
+</div>
+{{ end }}

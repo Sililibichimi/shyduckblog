@@ -1,0 +1,30 @@
+{{- /* Trang bộ sưu tập (layout: collection): sách, nhạc, dự án...
+     Khai báo các mục trong front matter:
+       items:
+         - title: "Tên"
+           by: "Tác giả / nghệ sĩ / công nghệ"
+           url: "https://..."
+           note: "Một câu cảm nhận"
+           year: 2026
+*/ -}}
+{{ define "main" }}
+<div class="list-page">
+  <header class="list-head">
+    <h1 class="list-title">{{ .Title }}</h1>
+    {{ with .Description }}<p class="article-desc">{{ . }}</p>{{ end }}
+    {{ with .Content }}<div class="prose list-intro">{{ . }}</div>{{ end }}
+  </header>
+  <ul class="collection">
+    {{ range $i, $it := .Params.items }}
+      <li class="card{{ if modBool $i 2 }}{{ else }} card-alt{{ end }} collection-item">
+        <div class="collection-top">
+          <h2 class="collection-title">{{ with $it.url }}<a href="{{ . }}">{{ end }}{{ $it.title }}{{ with $it.url }}</a>{{ end }}</h2>
+          {{ with $it.year }}<span class="hand date">{{ . }}</span>{{ end }}
+        </div>
+        {{ with $it.by }}<p class="card-sub">{{ . }}</p>{{ end }}
+        {{ with $it.note }}<p class="collection-note">{{ . }}</p>{{ end }}
+      </li>
+    {{ end }}
+  </ul>
+</div>
+{{ end }}

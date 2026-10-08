@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="{{ or site.Language.Locale "vi" }}" data-mode="{{ default "night" site.Params.defaultMode }}">
+<head>
+{{ partial "head.html" . }}
+</head>
+<body class="kind-{{ .Kind }}">
+<a class="skip-link" href="#main">bỏ qua menu</a>
+{{ partial "svg-defs.html" . }}
+<div class="wrap">
+{{ partial "header.html" . }}
+</div>
+<main id="main">
+{{ block "main" . }}{{ end }}
+</main>
+<div class="wrap">
+{{ partial "footer.html" . }}
+</div>
+{{ $site := resources.Get "js/site.js" | minify | fingerprint }}
+<script src="{{ $site.RelPermalink }}" integrity="{{ $site.Data.Integrity }}" defer></script>
+{{ if .IsHome }}
+{{ $scene := resources.Get "js/scene.js" | minify | fingerprint }}
+<script src="{{ $scene.RelPermalink }}" integrity="{{ $scene.Data.Integrity }}" defer></script>
+{{ end }}
+{{ if site.Params.fireflies }}
+{{ $ff := resources.Get "js/fireflies.js" | minify | fingerprint }}
+<script src="{{ $ff.RelPermalink }}" integrity="{{ $ff.Data.Integrity }}" defer></script>
+{{ end }}
+</body>
+</html>

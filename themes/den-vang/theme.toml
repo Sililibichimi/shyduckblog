@@ -1,0 +1,9 @@
+name = "Đèn Vàng"
+license = "MIT"
+description = "Theme blog cá nhân tối giản, nét vẽ tay, tông vàng trầm. Có cảnh đèn đường, đom đóm và người que ngồi nghe nhạc theo Last.fm."
+tags = ["blog", "minimal", "dark", "hand-drawn", "vietnamese"]
+features = ["day/night mode", "last.fm now playing", "giscus", "katex", "syntax highlighting"]
+min_version = "0.158.0"
+
+[author]
+  name = "[tên của bạn]"

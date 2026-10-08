@@ -1,0 +1,65 @@
+/* =========================================================
+   Cảnh đèn đường: đèn chập chờn, đom đóm, người que
+   ========================================================= */
+
+.scene { width: 100%; max-width: 360px; }
+.scene svg { display: block; width: 100%; height: auto; overflow: hidden; }
+
+:root[data-mode="day"] .night-only,
+:root[data-mode="night"] .day-only { display: none; }
+
+/* đèn thỉnh thoảng chập chờn: hai nhịp lệch nhau nên khó đoán */
+.lamp-a { animation: flick-a 7s linear infinite; }
+.lamp-b { animation: flick-b 11.3s linear infinite; }
+@keyframes flick-a {
+  0%, 80%, 100% { opacity: 1; }
+  81% { opacity: .35; } 82% { opacity: 1; }
+  84% { opacity: .15; } 85.5% { opacity: .85; }
+  87% { opacity: .4; } 88% { opacity: 1; }
+}
+@keyframes flick-b {
+  0%, 62%, 100% { opacity: 1; }
+  63% { opacity: .5; } 64% { opacity: 1; }
+  65% { opacity: .25; } 66% { opacity: 1; }
+}
+
+/* người que — trạng thái do js/scene.js đặt: is-off / is-walk / is-sit */
+.walker.is-off { display: none; }
+.walker.is-walk .pose-sit,
+.walker.is-sit .pose-walk { display: none; }
+
+.leg-a, .leg-b { transform-origin: 0px -20px; animation: swing .7s ease-in-out infinite alternate; }
+.leg-b { animation-direction: alternate-reverse; }
+.arm-a, .arm-b { transform-origin: 0px -34px; animation: swing-arm .7s ease-in-out infinite alternate-reverse; }
+.arm-b { animation-direction: alternate; }
+@keyframes swing { from { transform: rotate(26deg); } to { transform: rotate(-26deg); } }
+@keyframes swing-arm { from { transform: rotate(22deg); } to { transform: rotate(-22deg); } }
+
+.bob { animation: bob .55s ease-in-out infinite alternate; }
+@keyframes bob { from { transform: translate(0, 0); } to { transform: translate(.6px, 1.6px); } }
+
+.note { opacity: 0; animation: note 2.6s ease-out infinite; }
+.note-2 { animation-delay: 1.3s; }
+@keyframes note {
+  0% { transform: translate(0, 0); opacity: 0; }
+  20% { opacity: 1; }
+  100% { transform: translate(10px, -20px); opacity: 0; }
+}
+
+/* đom đóm bay ngang màn hình (js/fireflies.js) */
+.firefly {
+  position: fixed;
+  left: 0; top: 0;
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: var(--firefly);
+  pointer-events: none;
+  z-index: 40;
+  opacity: 0;
+  will-change: transform, opacity;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lamp-a, .lamp-b, .bob, .note, .leg-a, .leg-b, .arm-a, .arm-b { animation: none; }
+  .note, .lamp-ff, .firefly { display: none; }
+}

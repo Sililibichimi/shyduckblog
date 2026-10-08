@@ -1,0 +1,15 @@
+{{ define "main" }}
+<div class="list-page">
+  <header class="list-head">
+    <h1 class="list-title">{{ .Title | lower }}</h1>
+    <p class="article-desc">những chủ đề mình hay quay lại.</p>
+  </header>
+  <ul class="tag-cloud hand">
+    {{ range .Data.Terms.ByCount }}
+      <li><a class="tag" href="{{ .Page.RelPermalink }}">{{ .Page.Title }} <span class="tag-count">{{ .Count }}</span></a></li>
+    {{ else }}
+      <li class="empty">chưa có thẻ nào.</li>
+    {{ end }}
+  </ul>
+</div>
+{{ end }}

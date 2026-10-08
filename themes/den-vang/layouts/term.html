@@ -1,0 +1,10 @@
+{{ define "main" }}
+<div class="list-page">
+  <header class="list-head">
+    <a class="back-link hand" href="{{ "tags/" | relURL }}">← tất cả thẻ</a>
+    <h1 class="list-title"><span class="hand list-kicker">thẻ</span> {{ .Title }}</h1>
+    {{ with .Content }}<div class="prose list-intro">{{ . }}</div>{{ end }}
+  </header>
+  {{ partial "archive-list.html" .Paginator }}
+</div>
+{{ end }}

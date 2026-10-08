@@ -1,0 +1,109 @@
+baseURL = "https://shyduck.com/"        
+title = "Nguyễn Đức Sĩ"               
+locale = "vi"
+defaultContentLanguage = "vi"
+theme = "den-vang"
+enableRobotsTXT = true
+titleCaseStyle = "none"                 
+
+[pagination]
+  pagerSize = 12                       
+
+[taxonomies]
+  tag = "tags"
+
+[params]
+  # --- Giới thiệu trên trang chủ ---
+  tagline = "~ Xin chào ~"                          # dòng chữ nhỏ viết tay phía trên tiêu đề
+  heroTitle = "Ánh trăng có nói hộ"                           
+  heroTitleAccent = "lòng tôi."                                 #        phần in nghiêng màu vàng
+  intro = "Tôi là Sĩ, tôi thấy người ta làm cái này hay quá nên tôi đú theo."  
+  description = "Blog cá nhân của Sĩ."             
+  footer = "viết bằng tay, thắp bằng một ngọn đèn vàng."
+  author = "Sĩ"                                              
+
+  # Các chuyên mục được tính là "bài viết" (trang chủ, trang /writing/, RSS)
+  mainSections = ["vietnam", "english"]
+
+  # Các tab ở mục "gần đây" trên trang chủ (tab "tất cả" luôn có sẵn)
+  homeTabs = [
+    { name = "tiếng việt", section = "vietnam" },
+    { name = "english",    section = "english" },
+  ]
+  homeRecentCount = 6                    # số bài hiện ở trang chủ
+
+  # Màu nhấn (vàng trầm). Để trống thì dùng màu mặc định của theme.
+  accent = ""                            # ví dụ "#c9a43a"
+
+  # Hiệu ứng
+  fireflies = true                       # đom đóm thỉnh thoảng bay ngang màn hình
+  defaultMode = "night"                  # "night" (đêm) hoặc "day" (ngày) — người đọc vẫn tự đổi được
+
+  # Ảnh mặc định khi chia sẻ link lên mạng xã hội (đặt file trong static/)
+  images = []                            # ví dụ ["og.png"]
+
+  # --- Mạng xã hội (xoá dòng nào không dùng) ---
+  [[params.social]]
+    name = "github"
+    url = "https://github.com/Sililibichimi/"
+  
+  # --- Last.fm: người que ngồi nghe nhạc khi bạn đang nghe ---
+  # Hướng dẫn lấy API key: xem README.md, mục "Kết nối Last.fm".
+  # Để trống thì người que chỉ thỉnh thoảng đi ngang qua.
+  [params.lastfm]
+    user = "Wilson030hc0em"                            
+    apiKey = "12bf4504aaf891b763125a933f8f92b7"                       
+    pollSeconds = 180                     # bao lâu hỏi Last.fm một lần
+
+  # --- Ô "đang đọc" ở cột bên trang chủ: bỏ dấu # và điền tên sách khi muốn hiện ---
+  # [params.reading]
+  #   title = "Tên cuốn sách"
+  #   author = "Tác giả"
+  #   url = ""
+
+  # --- Bình luận bằng giscus (để trống repo thì tắt) ---
+  # Lấy các giá trị tại https://giscus.app sau khi bật Discussions cho repo.
+  [params.giscus]
+    repo = ""                            # ví dụ "ten-ban/blog"
+    repoId = ""
+    category = "Announcements"
+    categoryId = ""
+
+# --- Menu trên cùng ---
+[menus]
+  [[menus.main]]
+    name = "viết"
+    pageRef = "/writing"
+    weight = 1
+  [[menus.main]]
+    name = "đọc"
+    pageRef = "/reading"
+    weight = 2
+  [[menus.main]]
+    name = "nghe"
+    pageRef = "/listening"
+    weight = 3
+  [[menus.main]]
+    name = "dự án"
+    pageRef = "/projects"
+    weight = 4
+  [[menus.main]]
+    name = "về tôi"
+    pageRef = "/about"
+    weight = 5
+
+[markup]
+  [markup.highlight]
+    noClasses = false                    # dùng bảng màu code riêng của theme
+    lineNos = false
+  [markup.goldmark.renderer]
+    unsafe = true                        # cho phép chèn HTML trong bài
+  [markup.goldmark.extensions.passthrough]
+    enable = true                        # giữ nguyên công thức toán cho KaTeX
+    [markup.goldmark.extensions.passthrough.delimiters]
+      block = [['\[', '\]'], ['$$', '$$']]
+      inline = [['\(', '\)']]
+
+[outputs]
+  home = ["HTML", "RSS"]
+  section = ["HTML", "RSS"]

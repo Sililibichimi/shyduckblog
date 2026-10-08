@@ -1,0 +1,21 @@
+{{ $lf := site.Params.lastfm }}
+<div class="card" data-nowplaying>
+  <div class="card-head">
+    <svg width="28" height="28" viewBox="0 0 28 28" aria-hidden="true"><g class="s-accent" filter="url(#rough)"><circle cx="9" cy="21" r="4"></circle><path d="M13 21 V 5 L 23 3 V 17"></path><circle cx="19" cy="18" r="4"></circle></g></svg>
+    <h2 class="hand side-heading" data-np-label>đang nghe</h2>
+    <span class="live-dot" aria-hidden="true"></span>
+  </div>
+  <p class="card-title" data-np-title>{{ if and $lf.user $lf.apiKey }}đang dò sóng…{{ else }}lúc này đang im lặng.{{ end }}</p>
+  <p class="card-sub" data-np-artist></p>
+</div>
+
+{{ with site.Params.reading }}{{ if .title }}
+<div class="card card-alt">
+  <div class="card-head">
+    <svg width="28" height="28" viewBox="0 0 28 28" aria-hidden="true"><g class="s-accent" filter="url(#rough)"><path d="M3 6 C 8 4, 12 5, 14 8 C 16 5, 20 4, 25 6 V 23 C 20 21, 16 22, 14 24 C 12 22, 8 21, 3 23 Z"></path><path d="M14 8 V 24"></path></g></svg>
+    <h2 class="hand side-heading">đang đọc</h2>
+  </div>
+  <p class="card-title">{{ with .url }}<a href="{{ . }}">{{ end }}{{ .title }}{{ with .url }}</a>{{ end }}</p>
+  {{ with .author }}<p class="card-sub">{{ . }}</p>{{ end }}
+</div>
+{{ end }}{{ end }}

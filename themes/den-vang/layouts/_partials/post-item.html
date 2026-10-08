@@ -1,0 +1,7 @@
+<article class="post-item">
+  <a href="{{ .RelPermalink }}">
+    <time class="hand date" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "02 · 01 · 2006" }}</time>
+    <span class="post-title">{{ .Title }}</span>
+    {{ with .Description }}<span class="post-desc">{{ . }}</span>{{ end }}
+  </a>
+</article>

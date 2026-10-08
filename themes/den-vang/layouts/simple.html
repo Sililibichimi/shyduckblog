@@ -1,0 +1,12 @@
+{{- /* Trang đơn giản không có ngày tháng — dùng cho "về tôi" (layout: simple) */ -}}
+{{ define "main" }}
+<article class="article">
+  <header class="article-head">
+    <h1 class="article-title">{{ .Title }}</h1>
+    {{ with .Description }}<p class="article-desc">{{ . }}</p>{{ end }}
+  </header>
+  <div class="prose">
+    {{ .Content }}
+  </div>
+</article>
+{{ end }}
