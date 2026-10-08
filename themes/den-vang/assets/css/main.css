@@ -128,20 +128,6 @@ a:hover { color: var(--accent); }
           mask: url("../img/underline.svg") no-repeat center / 100% 100%;
 }
 
-.mode-toggle {
-  width: 44px; height: 44px;
-  display: inline-flex; align-items: center; justify-content: center;
-  background: none;
-  border: 1.5px dashed var(--line);
-  border-radius: 14px 8px 12px 9px;
-  color: var(--accent);
-  cursor: pointer;
-}
-.mode-toggle:hover { border-color: var(--accent); }
-.mode-toggle svg { fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
-:root[data-mode="night"] .icon-sun,
-:root[data-mode="day"] .icon-moon { display: none; }
-
 /* ---------- trang chủ ---------- */
 .hero {
   display: flex;
@@ -159,7 +145,7 @@ a:hover { color: var(--accent); }
   font-weight: 400;
   letter-spacing: -.5px;
 }
-.hero-title em { color: var(--accent); }
+.hero-title em { color: var(--accent); white-space: nowrap; }   /* phần in nghiêng không bị ngắt dòng giữa chừng */
 .hero-intro { margin: 0; max-width: 480px; font-size: 19px; line-height: 1.6; color: var(--muted); }
 .hero-scene { flex: 1 1 300px; display: flex; justify-content: center; }
 
@@ -244,6 +230,17 @@ html:not(.js) .tab-panel:not(#panel-all) { display: none; }
 .live-dot { display: none; width: 8px; height: 8px; margin-left: auto; border-radius: 50%; background: var(--accent); animation: live 1.6s ease-in-out infinite; }
 .is-live .live-dot { display: inline-block; }
 @keyframes live { 50% { opacity: .25; } }
+
+/* đĩa than ở ô "đang nghe": quay khi đang nghe, dừng tại chỗ khi tắt nhạc */
+.np-body { display: flex; align-items: center; gap: 14px; }
+.np-text { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.np-disc { flex: none; }
+.np-groove { opacity: .35; }
+.np-groove circle { stroke-width: 1.2; }
+.np-hole { fill: var(--bg); }
+.np-spin { transform-box: fill-box; transform-origin: center; animation: spin 3s linear infinite paused; }
+.is-live .np-spin { animation-play-state: running; }
+@keyframes spin { to { transform: rotate(360deg); } }
 .side-block { display: flex; flex-direction: column; gap: 10px; }
 
 .tag-list, .tag-cloud { display: flex; flex-wrap: wrap; gap: 10px; margin: 0; padding: 0; list-style: none; font-size: 18px; }
@@ -455,5 +452,5 @@ html:not(.js) .tab-panel:not(#panel-all) { display: none; }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { transition: none !important; }
-  .live-dot { animation: none; }
+  .live-dot, .np-spin { animation: none; }
 }

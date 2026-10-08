@@ -5,8 +5,21 @@
     <h2 class="hand side-heading" data-np-label>đang nghe</h2>
     <span class="live-dot" aria-hidden="true"></span>
   </div>
-  <p class="card-title" data-np-title>{{ if and $lf.user $lf.apiKey }}đang dò sóng…{{ else }}lúc này đang im lặng.{{ end }}</p>
-  <p class="card-sub" data-np-artist></p>
+  <div class="np-body">
+    <svg class="np-disc" width="48" height="48" viewBox="0 0 48 48" aria-hidden="true">
+      <g class="np-spin" filter="url(#rough)">
+        <circle class="s-ink" cx="24" cy="24" r="21"></circle>
+        <g class="s-ink np-groove"><circle cx="24" cy="24" r="16"></circle><circle cx="24" cy="24" r="12.5"></circle></g>
+        <path class="s-accent" d="M10 15 A 17 17 0 0 1 19 8.5"></path>
+        <circle class="f-accent" cx="24" cy="24" r="6.5"></circle>
+        <circle class="np-hole" cx="24" cy="24" r="1.6"></circle>
+      </g>
+    </svg>
+    <div class="np-text">
+      <p class="card-title" data-np-title>{{ if and $lf.user $lf.apiKey }}đang dò sóng…{{ else }}lúc này đang im lặng.{{ end }}</p>
+      <p class="card-sub" data-np-artist></p>
+    </div>
+  </div>
 </div>
 
 {{ with site.Params.reading }}{{ if .title }}

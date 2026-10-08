@@ -1,9 +1,9 @@
 /*
  * Đèn Vàng — người que và Last.fm
  *
- * - Không nghe nhạc: thỉnh thoảng người que đi ngang qua ghế đá.
- * - Đang nghe nhạc (Last.fm báo "nowplaying"): người que đi tới, ngồi xuống ghế,
- *   đeo tai nghe, gật gù. Khi nhạc tắt, người que đứng dậy đi tiếp.
+ * - Đang nghe nhạc (Last.fm báo "nowplaying"): người que ngồi trên ghế đá,
+ *   đeo tai nghe, gật gù.
+ * - Không nghe nhạc: người que mờ dần rồi biến mất.
  * - Ô "đang nghe" ở cột bên được cập nhật tên bài và nghệ sĩ.
  */
 (function () {
@@ -13,60 +13,9 @@
   var walker = document.getElementById("walker");
   if (!scene || !walker) return;
 
-  var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-  /* toạ độ trong khung SVG 360 × 300 */
-  var START = -24, END = 384, BENCH = 187, GROUND = 260;
-  var SPEED = 30;                       // đơn vị SVG mỗi giây
-
-  var listening = false;
-  var state = "off";                    // off | walk | sit | stand
-  var x = START, satThisTrip = false, wait = rand(1.5, 4), last = 0;
-
-  function rand(a, b) { return a + Math.random() * (b - a); }
-  function pose(p) { walker.setAttribute("class", "walker is-" + p); }
-  function place() { walker.setAttribute("transform", "translate(" + x.toFixed(1) + " " + GROUND + ")"); }
-
-  function tick(t) {
-    var dt = last ? Math.min((t - last) / 1000, 0.1) : 0;
-    last = t;
-
-    if (state === "off") {
-      wait -= dt;
-      if (wait <= 0) { state = "walk"; x = START; satThisTrip = false; pose("walk"); place(); }
-    } else if (state === "walk") {
-      x += SPEED * dt;
-      if (listening && !satThisTrip && x >= BENCH && x < BENCH + 30) {
-        x = BENCH; state = "sit"; satThisTrip = true; pose("sit");
-      }
-      if (x >= END) {
-        state = "off"; pose("off");
-        wait = listening ? rand(2, 5) : rand(18, 40);   // không nghe nhạc thì lâu lâu mới đi qua
-      }
-      place();
-    } else if (state === "sit") {
-      if (!listening) { state = "stand"; wait = 0.9; } // ngồi thêm chút rồi đứng dậy
-    } else if (state === "stand") {
-      wait -= dt;
-      if (wait <= 0) { state = "walk"; pose("walk"); }
-    }
-    requestAnimationFrame(tick);
-  }
-
   function setListening(on) {
-    if (on === listening) return;
-    listening = on;
-    if (reduceMotion) { staticPose(); return; }
-    if (on && state === "off") wait = Math.min(wait, rand(1, 3));
+    walker.setAttribute("class", "walker" + (on ? " is-sit" : ""));
   }
-
-  function staticPose() {
-    if (listening) { x = BENCH; pose("sit"); place(); }
-    else pose("off");
-  }
-
-  if (reduceMotion) staticPose();
-  else requestAnimationFrame(tick);
 
   /* ---------- Last.fm ---------- */
   var user = scene.getAttribute("data-lastfm-user");

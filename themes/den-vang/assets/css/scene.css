@@ -23,17 +23,9 @@
   65% { opacity: .25; } 66% { opacity: 1; }
 }
 
-/* người que — trạng thái do js/scene.js đặt: is-off / is-walk / is-sit */
-.walker.is-off { display: none; }
-.walker.is-walk .pose-sit,
-.walker.is-sit .pose-walk { display: none; }
-
-.leg-a, .leg-b { transform-origin: 0px -20px; animation: swing .7s ease-in-out infinite alternate; }
-.leg-b { animation-direction: alternate-reverse; }
-.arm-a, .arm-b { transform-origin: 0px -34px; animation: swing-arm .7s ease-in-out infinite alternate-reverse; }
-.arm-b { animation-direction: alternate; }
-@keyframes swing { from { transform: rotate(26deg); } to { transform: rotate(-26deg); } }
-@keyframes swing-arm { from { transform: rotate(22deg); } to { transform: rotate(-22deg); } }
+/* người que — js/scene.js thêm is-sit khi Last.fm báo đang nghe nhạc */
+.walker { opacity: 0; transition: opacity .8s ease; }
+.walker.is-sit { opacity: 1; }
 
 .bob { animation: bob .55s ease-in-out infinite alternate; }
 @keyframes bob { from { transform: translate(0, 0); } to { transform: translate(.6px, 1.6px); } }
@@ -60,6 +52,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .lamp-a, .lamp-b, .bob, .note, .leg-a, .leg-b, .arm-a, .arm-b { animation: none; }
+  .lamp-a, .lamp-b, .bob, .note { animation: none; }
+  .walker { transition: none; }
   .note, .lamp-ff, .firefly { display: none; }
 }

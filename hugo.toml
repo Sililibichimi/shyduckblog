@@ -15,8 +15,8 @@ titleCaseStyle = "none"
 [params]
   # --- Giới thiệu trên trang chủ ---
   tagline = "~ Xin chào ~"                          # dòng chữ nhỏ viết tay phía trên tiêu đề
-  heroTitle = "Ánh trăng có nói hộ"                           
-  heroTitleAccent = "lòng tôi."                                 #        phần in nghiêng màu vàng
+  heroTitle = "Và mọi thứ đều"                           
+  heroTitleAccent = "ngả vàng."                                 #        phần in nghiêng màu vàng
   intro = "Tôi là Sĩ, tôi thấy người ta làm cái này hay quá nên tôi đú theo."  
   description = "Blog cá nhân của Sĩ."             
   footer = "viết bằng tay, thắp bằng một ngọn đèn vàng."
@@ -37,7 +37,7 @@ titleCaseStyle = "none"
 
   # Hiệu ứng
   fireflies = true                       # đom đóm thỉnh thoảng bay ngang màn hình
-  defaultMode = "night"                  # "night" (đêm) hoặc "day" (ngày) — người đọc vẫn tự đổi được
+  defaultMode = "night"                  # "night" (đêm) hoặc "day" (ngày)
 
   # Ảnh mặc định khi chia sẻ link lên mạng xã hội (đặt file trong static/)
   images = []                            # ví dụ ["og.png"]
@@ -47,13 +47,13 @@ titleCaseStyle = "none"
     name = "github"
     url = "https://github.com/Sililibichimi/"
   
-  # --- Last.fm: người que ngồi nghe nhạc khi bạn đang nghe ---
+  # --- Last.fm: người que ngồi trên ghế nghe nhạc khi bạn đang nghe, tắt nhạc thì biến mất ---
   # Hướng dẫn lấy API key: xem README.md, mục "Kết nối Last.fm".
-  # Để trống thì người que chỉ thỉnh thoảng đi ngang qua.
+  # Để trống thì người que không bao giờ xuất hiện.
   [params.lastfm]
     user = "Wilson030hc0em"                            
     apiKey = "12bf4504aaf891b763125a933f8f92b7"                       
-    pollSeconds = 180                     # bao lâu hỏi Last.fm một lần
+    pollSeconds = 30                     # bao lâu hỏi Last.fm một lần
 
   # --- Ô "đang đọc" ở cột bên trang chủ: bỏ dấu # và điền tên sách khi muốn hiện ---
   # [params.reading]

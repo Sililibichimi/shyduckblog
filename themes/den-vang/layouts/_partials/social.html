@@ -1,4 +1,3 @@
 <ul class="social hand">
   {{ range site.Params.social }}<li><a href="{{ .url }}" rel="me noopener">{{ .name }}</a></li>{{ end }}
-  {{ with site.Home.OutputFormats.Get "rss" }}<li><a href="{{ .RelPermalink }}">rss</a></li>{{ end }}
 </ul>

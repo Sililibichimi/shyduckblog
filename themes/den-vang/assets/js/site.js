@@ -1,32 +1,6 @@
-/* Đèn Vàng — chế độ ngày/đêm và các tab ở trang chủ */
+/* Đèn Vàng — các tab ở trang chủ */
 (function () {
   "use strict";
-
-  /* ---------- ngày / đêm ---------- */
-  var root = document.documentElement;
-  var toggle = document.querySelector(".mode-toggle");
-
-  function currentMode() { return root.getAttribute("data-mode") === "day" ? "day" : "night"; }
-  function syncToggle() {
-    if (!toggle) return;
-    var day = currentMode() === "day";
-    toggle.setAttribute("aria-pressed", day ? "true" : "false");
-    toggle.setAttribute("title", day ? "Tắt đèn (chế độ đêm)" : "Bật sáng (chế độ ngày)");
-  }
-  if (toggle) {
-    syncToggle();
-    toggle.addEventListener("click", function () {
-      var next = currentMode() === "day" ? "night" : "day";
-      root.setAttribute("data-mode", next);
-      try { localStorage.setItem("dv-mode", next); } catch (e) {}
-      syncToggle();
-      /* báo cho khung bình luận giscus đổi màu theo */
-      var frame = document.querySelector("iframe.giscus-frame");
-      if (frame) {
-        frame.contentWindow.postMessage({ giscus: { setConfig: { theme: next === "day" ? "light" : "dark_dimmed" } } }, "https://giscus.app");
-      }
-    });
-  }
 
   /* ---------- tab "gần đây" ---------- */
   var tablist = document.querySelector('.tabs[role="tablist"]');

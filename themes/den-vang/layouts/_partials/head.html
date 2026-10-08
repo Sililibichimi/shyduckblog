@@ -5,12 +5,7 @@
 {{ with site.Params.author }}<meta name="author" content="{{ . }}">{{ end }}
 <meta name="theme-color" content="#17150f">
 <script>
-  /* đặt chế độ ngày/đêm trước khi trang hiện ra để không bị nháy */
-  (function () {
-    var d = document.documentElement;
-    d.className += " js";
-    try { var m = localStorage.getItem("dv-mode"); if (m === "day" || m === "night") d.setAttribute("data-mode", m); } catch (e) {}
-  })();
+  document.documentElement.className += " js";
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
