@@ -51,6 +51,56 @@
   will-change: transform, opacity;
 }
 
+/* con trỏ đom đóm (bật bằng params.cursor) — chỉ trên máy có chuột.
+   Có JS: js/cursor.js vẽ đom đóm biết vỗ cánh và ẩn con trỏ hệ thống.
+   Không có JS: dùng ảnh tĩnh img/cursor.svg. */
+@media (hover: hover) and (pointer: fine) {
+  .has-cursor, .has-cursor body { cursor: url("../img/cursor.svg") 3 3, auto; }
+  .has-cursor :is(a, button, [role="tab"], summary, label, select) { cursor: url("../img/cursor-lit.svg") 3 3, pointer; }
+  .cursor-live, .cursor-live * { cursor: none !important; }
+  .has-cursor :is(input, textarea, [contenteditable]) { cursor: text !important; }
+}
+
+.cursor-fly {
+  position: fixed;
+  left: 0; top: 0;
+  width: 32px; height: 32px;
+  pointer-events: none;
+  z-index: 60;
+  opacity: 0;
+  transition: opacity .2s ease;
+}
+.cursor-fly.is-on { opacity: 1; }
+.cursor-fly svg { position: relative; display: block; }
+
+.cursor-belly { fill: var(--firefly); fill-opacity: .6; transition: fill-opacity .2s ease; }
+.cursor-fly.is-lit .cursor-belly { fill-opacity: 1; }
+
+/* quầng sáng gắn ở bụng đom đóm */
+.cursor-halo {
+  position: absolute;
+  left: 19px; top: 19px;
+  width: 24px; height: 24px;
+  margin: -12px 0 0 -12px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--firefly) 0%, transparent 70%);
+  opacity: .35;
+  transition: transform .25s ease, opacity .25s ease;
+}
+.cursor-fly.is-lit .cursor-halo { transform: scale(1.6); opacity: .7; }
+.cursor-fly.is-flash .cursor-halo { animation: cursor-flash .45s ease-out; }
+@keyframes cursor-flash {
+  0% { transform: scale(1.4); opacity: 1; }
+  100% { transform: scale(2.8); opacity: 0; }
+}
+
+/* vỗ cánh khi rê vào chỗ bấm được: cánh xoay quanh gốc cánh ở ngực */
+.cursor-wing { transform-box: view-box; transform-origin: 16px 12.5px; }
+.cursor-fly.is-lit .cursor-wing-l { animation: flap-l .11s ease-in-out infinite alternate; }
+.cursor-fly.is-lit .cursor-wing-r { animation: flap-r .11s ease-in-out infinite alternate; }
+@keyframes flap-l { to { transform: rotate(28deg); } }
+@keyframes flap-r { to { transform: rotate(-28deg); } }
+
 @media (prefers-reduced-motion: reduce) {
   .lamp-a, .lamp-b, .bob, .note { animation: none; }
   .walker { transition: none; }

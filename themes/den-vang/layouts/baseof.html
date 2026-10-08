@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="{{ or site.Language.Locale "vi" }}" data-mode="{{ default "night" site.Params.defaultMode }}">
+<html lang="{{ or site.Language.Locale "vi" }}" data-mode="{{ default "night" site.Params.defaultMode }}"{{ if site.Params.cursor }} class="has-cursor"{{ end }}>
 <head>
 {{ partial "head.html" . }}
 </head>
@@ -24,6 +24,10 @@
 {{ if site.Params.fireflies }}
 {{ $ff := resources.Get "js/fireflies.js" | minify | fingerprint }}
 <script src="{{ $ff.RelPermalink }}" integrity="{{ $ff.Data.Integrity }}" defer></script>
+{{ end }}
+{{ if site.Params.cursor }}
+{{ $cur := resources.Get "js/cursor.js" | minify | fingerprint }}
+<script src="{{ $cur.RelPermalink }}" integrity="{{ $cur.Data.Integrity }}" defer></script>
 {{ end }}
 </body>
 </html>

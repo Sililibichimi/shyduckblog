@@ -37,6 +37,7 @@ titleCaseStyle = "none"
 
   # Hiệu ứng
   fireflies = true                       # đom đóm thỉnh thoảng bay ngang màn hình
+  cursor = true                          # con trỏ chuột hình đom đóm, có đốm sáng bay theo (chỉ trên máy tính)
   defaultMode = "night"                  # "night" (đêm) hoặc "day" (ngày)
 
   # Ảnh mặc định khi chia sẻ link lên mạng xã hội (đặt file trong static/)
