@@ -1,0 +1,60 @@
+{{- /* Sĩ đứng dưới đèn, Wilson là cái bóng — thỉnh thoảng cái bóng cử động lệch với người thật.
+       Dùng: {{< den-bong >}} */ -}}
+<figure class="den-bong">
+<svg viewBox="0 0 520 220" role="img" aria-label="Hình vẽ tay: một người que đứng dưới cột đèn đường, cái bóng đổ dài phía sau">
+  <!-- ánh đèn -->
+  <g class="lamp-a"><g class="lamp-b">
+    <polygon class="f-accent" points="160,64 176,64 282,192 104,192" opacity="0.13"></polygon>
+    <circle class="f-accent" cx="168" cy="62" r="20" opacity="0.2"></circle>
+  </g></g>
+
+  <!-- mặt đất, cột đèn -->
+  <g class="s-ink" filter="url(#rough)" opacity="0.85">
+    <path d="M20 192 C 120 188, 230 196, 330 190 S 460 194, 500 191"></path>
+    <path d="M118 192 L 120 34"></path>
+    <path d="M108 192 L 130 192 L 126 180 L 112 180 Z"></path>
+    <path d="M120 38 C 140 26, 162 30, 168 48"></path>
+  </g>
+  <path class="s-accent" d="M157 48 L 179 48 L 174 62 L 162 62 Z" filter="url(#rough)"></path>
+  <g class="lamp-a"><g class="lamp-b">
+    <path class="f-accent" d="M157 48 L 179 48 L 174 62 L 162 62 Z" filter="url(#rough)"></path>
+  </g></g>
+
+  <!-- Wilson: cái bóng đổ trên mặt đất (vẽ trước để nằm dưới chân Sĩ) -->
+  <g class="bong" transform="translate(222 192) matrix(1 0 -1.15 0.62 0 0)" aria-hidden="true">
+    <path d="M0 -25 L -7 0 M0 -25 L 7 0 M0 -55 L 0 -25 M0 -48 L -8 -32"></path>
+    <path d="M0 -48 L 8 -32">
+      <animateTransform attributeName="transform" type="rotate" dur="9s" repeatCount="indefinite"
+        keyTimes="0;0.7;0.74;0.78;0.82;0.86;0.9;1"
+        values="0 0 -48;0 0 -48;-130 0 -48;-100 0 -48;-130 0 -48;-100 0 -48;0 0 -48;0 0 -48"></animateTransform>
+    </path>
+    <circle cx="0" cy="-62" r="7">
+      <animateTransform attributeName="transform" type="rotate" dur="13s" repeatCount="indefinite"
+        keyTimes="0;0.4;0.45;0.6;0.65;1"
+        values="0 0 -55;0 0 -55;18 0 -55;18 0 -55;0 0 -55;0 0 -55"></animateTransform>
+    </circle>
+  </g>
+
+  <!-- Sĩ: đứng yên, nghiêm túc -->
+  <g class="s-ink" transform="translate(222 192)" filter="url(#rough)" aria-hidden="true">
+    <circle cx="0" cy="-62" r="7"></circle>
+    <path d="M0 -55 L 0 -25 M0 -25 L -7 0 M0 -25 L 7 0 M0 -48 L -8 -32 M0 -48 L 8 -32"></path>
+  </g>
+
+  <!-- tên -->
+  <g class="den-bong-label" aria-hidden="true">
+    <text x="244" y="118">Sĩ</text>
+    <path class="s-ink" d="M242 122 C 236 124, 234 126, 232 128" filter="url(#rough)"></path>
+    <text x="352" y="166" class="is-wilson">Wilson</text>
+    <path class="s-accent" d="M350 170 C 336 176, 326 178, 314 178" filter="url(#rough)"></path>
+  </g>
+
+  <!-- một con đom đóm quanh đèn -->
+  <g aria-hidden="true">
+    <circle class="f-firefly" r="6" opacity="0.35" filter="url(#ffglow)"></circle><circle class="f-firefly" r="2"></circle>
+    <animateMotion dur="10s" repeatCount="indefinite" path="M190 70 C 230 60, 240 120, 205 120 C 170 120, 150 90, 165 76 C 172 70, 180 72, 190 70 Z"></animateMotion>
+    <animate attributeName="opacity" values="0;1;0.3;1;0.6;0" dur="2.8s" repeatCount="indefinite"></animate>
+  </g>
+</svg>
+{{ with .Get "caption" }}<figcaption>{{ . }}</figcaption>{{ end }}
+</figure>

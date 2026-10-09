@@ -1,0 +1,98 @@
+/* =========================================================
+   Trang "về tôi": Sĩ (nghiêm túc) và Wilson (cái bóng, tửng tửng)
+   Shortcode: den-bong, wilson, gach, giay-note, yellow
+   ========================================================= */
+
+/* hình Sĩ dưới đèn, Wilson là cái bóng */
+.den-bong { margin: 0 0 2.2em; }
+.den-bong svg { display: block; width: 100%; height: auto; }
+.den-bong .bong path, .den-bong .bong circle {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  opacity: .45;
+}
+.den-bong-label text { font-family: "Patrick Hand", cursive; font-size: 19px; fill: var(--ink); }
+.den-bong-label text.is-wilson { fill: var(--accent); }
+
+/* Wilson chen ngang: câu trong ngoặc, chữ viết tay màu vàng, ngay sau câu của Sĩ */
+.wilson {
+  margin-left: .3em;
+  font-size: 1.05em;
+  color: var(--accent);
+}
+
+/* Wilson gạch chữ của Sĩ rồi viết đè lên trên */
+.gach { position: relative; display: inline-block; white-space: nowrap; }
+.gach s { text-decoration-color: var(--accent); text-decoration-thickness: 2px; color: var(--muted); }
+.gach-moi {
+  position: absolute;
+  left: 50%; bottom: 72%;
+  transform: translateX(-50%) rotate(-4deg);
+  font-size: 18px;
+  line-height: 1;
+  color: var(--accent);
+  white-space: nowrap;
+}
+.prose p:has(.gach) { padding-top: .35em; }
+
+/* mẩu giấy note dán lệch */
+.giay-note {
+  position: relative;
+  max-width: 340px;
+  margin: 2.4em auto 2.4em 6%;
+  padding: 22px 24px 16px;
+  background: var(--surface);
+  border-radius: 3px 8px 4px 10px;
+  box-shadow: 4px 6px 0 rgba(0, 0, 0, .18);
+  transform: rotate(2deg);
+  font-size: 21px;
+  line-height: 1.45;
+}
+.giay-note::before { /* miếng băng dính */
+  content: "";
+  position: absolute;
+  left: 50%; top: -11px;
+  width: 84px; height: 22px;
+  margin-left: -42px;
+  background: var(--accent);
+  opacity: .35;
+  transform: rotate(-3deg);
+}
+.giay-note-title { margin: 0 0 .4em; color: var(--accent); }
+.giay-note > :last-child { margin-bottom: 0; }
+.giay-note ul { margin: 0; padding-left: 1.2em; }
+.giay-note li { margin-bottom: .2em; }
+.giay-note strong { font-weight: 400; color: var(--accent); }
+
+/* câu kết của Sĩ, nằm trong quầng đèn */
+.yellow { position: relative; margin: 3.2em 0 2.8em; padding: 34px 6% 10px; text-align: center; }
+.yellow-glow {
+  position: absolute;
+  left: 0; right: 0; top: -20px;
+  height: 260px;
+  background: radial-gradient(ellipse 50% 100% at 50% 0%, var(--firefly) 0%, transparent 100%);
+  opacity: .14;
+  pointer-events: none;
+  animation: flick-a 7s linear infinite;
+}
+.prose .yellow-quote {
+  position: relative;
+  margin: 0;
+  padding: 0;
+  font-size: 28px;
+  line-height: 1.45;
+  font-style: italic;
+}
+.prose .yellow-quote::before { display: none; }
+.yellow-wilson { margin-top: 1.1em; font-size: 18px; color: var(--accent); }
+
+@media (max-width: 640px) {
+  .prose .yellow-quote { font-size: 23px; }
+  .giay-note { margin-left: 2%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .yellow-glow { animation: none; }
+}

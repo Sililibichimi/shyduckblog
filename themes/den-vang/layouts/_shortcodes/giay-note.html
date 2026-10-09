@@ -1,0 +1,8 @@
+{{- /* Mẩu giấy note Wilson dán lệch lên trang.
+       {{< giay-note title="kỹ năng (Wilson tự khai)" >}}
+       - ...
+       {{< /giay-note >}} */ -}}
+<aside class="giay-note hand">
+  {{ with .Get "title" }}<p class="giay-note-title">{{ . }}</p>{{ end }}
+  {{ .Inner | .Page.RenderString (dict "display" "block") }}
+</aside>

@@ -1,0 +1,7 @@
+{{- /* Câu kết của Sĩ, nằm trong quầng đèn. Tham số "wilson" (tuỳ chọn): câu Wilson lí nhí bên dưới.
+       {{< yellow wilson="(nó chép Coldplay đấy)" >}}Nếu cuộc đời là...{{< /yellow >}} */ -}}
+<figure class="yellow">
+  <span class="yellow-glow" aria-hidden="true"></span>
+  <blockquote class="yellow-quote">{{ .Inner | .Page.RenderString }}</blockquote>
+  {{ with .Get "wilson" }}<figcaption class="yellow-wilson hand">{{ . }}</figcaption>{{ end }}
+</figure>
